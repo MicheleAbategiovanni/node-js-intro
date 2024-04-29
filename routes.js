@@ -38,11 +38,13 @@ const requestHandler = (req, res) => {
       log("Buffer: " + parsedBody);
       const message = parsedBody.split("=")[1];
       log("Body Split: " + message);
-      fs.writeFileSync("message.text", message);
-      res.statusCode = 302;
-      res.setHeader("Location", "/");
-      //
-      return res.end();
+      //   fs.writeFileSync("message.text", message);
+      fs.writeFile("message.text", message, (err) => {
+        res.statusCode = 302;
+        res.setHeader("Location", "/");
+        //
+        return res.end();
+      });
     });
   }
 
